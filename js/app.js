@@ -63,137 +63,11 @@ var orders = [
     orderstatus:{
       questions:true,
       coupons:true,
-      artwork:true,
-      details:true,
-    },
-    saved:false
-  },
-  {
-    name:"Marco's Pizza - Delaware - 1010",
-    product:"Medium Specialty Box Topper",
-    service:"Print Only",
-    shipTo:"219 S. Sandusky St.",
-    qty:3500,
-    weeks:1,
-    price:130.79,
-    card:"CC - Ending with 4246",
-    thumb: "https://www.themailshark.com/prepress/img/example/Artwork_1_1029_41_41_1010136.jpg",
-    orderstatus:{
-      questions:true,
-      coupons:true,
       artwork:false,
       details:false,
     },
     saved:false
-  },
-  {
-    name:"Marco's Pizza - Delaware - 1010",
-    product:"Medium Specialty Box Topper",
-    service:"Direct Mail",
-    shipTo:"219 S. Sandusky St.",
-    qty:10000,
-    weeks:6,
-    price:5098.74,
-    card:"CC - Ending with 4246",
-    thumb: "https://www.themailshark.com/prepress/img/example/ScratchOff.jpg",
-    orderstatus:{
-      questions:true,
-      coupons:true,
-      artwork:true,
-      details:true,
-    },
-    saved:false
-  },
-  {
-    name:"Marco's Pizza - Delaware - 1010",
-    product:"Stay Connected Interior Sticker",
-    service:"Print Only",
-    shipTo:"219 S. Sandusky St.",
-    qty:5,
-    weeks:1,
-    price:23.33,
-    card:"CC - Ending with 4246",
-    thumb: "https://www.themailshark.com/prepress/img/example/Artwork_1_1029_15_15_1010150.jpg",
-    orderstatus:{
-      questions:true,
-      coupons:true,
-      artwork:false,
-      details:true,
-    },
-    saved:false
-  },
-  {
-    name:"Marco's Pizza - Tiffin - 1029",
-    product:"CrewBuilder Join Our Team (Coupons)",
-    service:"Print Only",
-    shipTo:"75 Melmore St.",
-    qty:2000,
-    weeks:1,
-    price:57.54,
-    card:"CC - Ending with 4125",
-    thumb: "https://www.themailshark.com/prepress/img/example/Artwork_1_1029_38_38_1010118.jpg",
-    orderstatus:{
-      questions:true,
-      coupons:true,
-      artwork:true,
-      details:true,
-    },
-    saved:false
-  },
-  {
-    name:"Marco's Pizza - Tiffin - 1029",
-    product:"CrewBuilder Join Our Team (Coupons)",
-    service:"Print Only",
-    shipTo:"75 Melmore St.",
-    qty:2000,
-    weeks:1,
-    price:57.54,
-    card:"CC - Ending with 4125",
-    thumb: "https://www.themailshark.com/prepress/img/example/Artwork_1_1029_38_38_1010118.jpg",
-    orderstatus:{
-      questions:true,
-      coupons:true,
-      artwork:false,
-      details:true,
-    },
-    saved:false
-  },
-  {
-    name:"Marco's Pizza - Middletown - 1037",
-    product:"Football Magnet",
-    service:"Direct Mail",
-    shipTo:"75 Melmore St.",
-    qty:2000,
-    weeks:5,
-    price:1451.50,
-    card:"CC - Ending with 4117",
-    thumb: "https://www.themailshark.com/prepress/img/example/Artwork_1_1029_49_49_1010135.jpg",
-    orderstatus:{
-      questions:true,
-      coupons:true,
-      artwork:true,
-      details:true,
-    },
-    saved:false
-  },
-  {
-    name:"Marco's Pizza - Middletown - 1037",
-    product:"Football Magnet",
-    service:"Direct Mail",
-    shipTo:"75 Melmore St.",
-    qty:2000,
-    weeks:5,
-    price:1451.50,
-    card:"CC - Ending with 4117",
-    thumb: "https://www.themailshark.com/prepress/img/example/Artwork_1_1029_49_49_1010135.jpg",
-    orderstatus:{
-      questions:true,
-      coupons:true,
-      artwork:true,
-      details:false,
-    },
-    saved:false
-  },
+  }
 ];
 //#endregion
 
@@ -318,10 +192,11 @@ function addOrders (orders, callback) {
       var statusTag = $("#" + orders[i].id).find("." + falseStats[x]);
       statusTag.addClass("fail").removeClass("pass")
       // statusTag.css("border-color", "rgba(220, 20, 60, 0.2)");
-      statusTag.find("i").css("color", "crimson").removeClass("fa-check-circle").addClass("fa-times-circle");
+      statusTag.find("i").css("color", "rgba(100, 100, 100, 0.3)").removeClass("fa-check-circle").addClass("fa-times-circle");
       if (falseStats[x] == "artwork") {
-          statusTag.find("i").removeClass("fa-times-circle").addClass("fa-sync-alt")
-          statusTag.find(".statuslabel").prepend("Create ");
+        statusTag.addClass("pass").removeClass("fail")
+          statusTag.find("i").removeClass("fa-times-circle").addClass("fa-eye").css("color", "mediumseagreen");
+          statusTag.find(".statuslabel").prepend("View ");
       }    
     }
   }
@@ -536,31 +411,11 @@ $(document).on("click", "#delete", function() {
 */
 //#region
 $(document).on("click", ".statustag", function() {
-  var which = $(this).attr("id");
-  
-  var orderid = $(this).attr("value");
-  var orderData = $("#" + orderid).find('.data-store').text();
-  var order = JSON.parse(orderData);
-
-  // If the text is red, then pass it. Otherwise fail it
-  console.log(!$(this).hasClass("pass"));
-
-  if (!$(this).hasClass("pass")) {
-    order.orderstatus[which] = true;
-  } else {
-    order.orderstatus[which] = false;
+  // Removed all of this to trigger the Approve Artwork view.
+  var which = $(this).text();
+  if (which == "View Artwork") {
+    alert(which);
   }
-
-  // Remove this order and also from details
-  $("#" + orderid).remove();
-  $("#totals-" + orderid).remove();
-
-  // Add Order
-  addOrders ([order], function() { // then
-    countOrders(function() { // then
-      calculateTotals();
-    });
-  });
   
 });
 
@@ -782,3 +637,28 @@ function noMoreLonelyWords(selector, numWords){
       elems[i].innerHTML = textMinusLastWords + " " +  lastWords;
     }
   }
+
+  /**
+  *  Prevent single word lines in wrap
+  *  https://stackoverflow.com/questions/4823722/how-can-i-avoid-one-word-on-the-last-line-with-css
+  */
+  //#region
+  //https://stackoverflow.com/questions/5916900/how-can-you-detect-the-version-of-a-browser
+  function get_browser() {
+    var ua=navigator.userAgent,tem,M=ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []; 
+    if(/trident/i.test(M[1])){
+        tem=/\brv[ :]+(\d+)/g.exec(ua) || []; 
+        return {name:'IE',version:(tem[1]||'')};
+        }   
+    if(M[1]==='Chrome'){
+        tem=ua.match(/\bOPR|Edge\/(\d+)/)
+        if(tem!=null)   {return {name:'Opera', version:tem[1]};}
+        }   
+    M=M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem=ua.match(/version\/(\d+)/i))!=null) {M.splice(1,1,tem[1]);}
+    return {
+      name: M[0],
+      version: M[1]
+    };
+ }
+

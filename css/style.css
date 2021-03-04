@@ -271,12 +271,13 @@ border-color:rgb(60,179,113);
 }
 
 .fail {
-border-color: rgba(220, 20, 60, 0.2);
+border-color: rgba(100, 100, 100, 0.3);
+color: rgba(100, 100, 100, 0.3);
 }
-
+/* 
 .fail:hover {
 border-color: crimson;
-}
+} */
 
 .statusicon {
 /* min-width:50px; */
@@ -717,6 +718,47 @@ font-size:9pt;
 #saved-orders .status {
 display:none;
 }
+
+#view-artwork-container {
+    position:absolute;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    z-index:1000;
+    background-color:rgba(100, 100, 100, 0.6);
+    width:100vw;
+    height:100vh;
+}
+
+#view-artwork-screen {
+    width:80vw;
+    height:80vh;
+    background-color:white;
+    display:flex;
+    flex-direction: column;
+}
+
+#pdf-area {
+    height:100%;
+    width:100%;
+    background-color:lightblue;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#pdf-viewer {
+    height:calc(100% - 20px);
+    width:calc(100% - 20px);
+    background-color:lightcoral;
+}
+
+#button-area {
+    height:50px;
+}
+
+
+
 
 /* Mobile Breakpoint @1353px */
 @media only screen and (max-width: 1353px) {
