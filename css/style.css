@@ -719,7 +719,7 @@ font-size:9pt;
 display:none;
 }
 
-#view-artwork-container {
+/*#view-artwork-container {
     position:absolute;
     display:flex;
     align-items: center;
@@ -755,8 +755,11 @@ display:none;
 
 #button-area {
     height:50px;
-}
+}*/
 
+#images {
+    display:none;
+}
 
 
 

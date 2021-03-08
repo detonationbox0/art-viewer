@@ -1,3 +1,4 @@
+
 // Javascript
 console.log("Hello there!");
 
@@ -414,7 +415,7 @@ $(document).on("click", ".statustag", function() {
   // Removed all of this to trigger the Approve Artwork view.
   var which = $(this).text();
   if (which == "View Artwork") {
-    alert(which);
+    gallery.show();
   }
   
 });
